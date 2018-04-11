@@ -1,1 +1,2 @@
-# C---Store-Manager---College-Project
+# C++ Store Manager
+## College Project
