@@ -26,10 +26,18 @@ void DateTime::setSecond(int second) {
 	else throw DateTimeError::SECOND;
 }
 
+int DateTime::getSecond() const {
+	return second_;
+}
+
 void DateTime::setMinute(int minute) {
 	if (minute >= 0 && minute <= 59)
 		minute_ = minute;
 	else throw DateTimeError::MINUTE;
+}
+
+int DateTime::getMinute() const {
+	return minute_;
 }
 
 void DateTime::setHour(int hour) {
@@ -38,10 +46,18 @@ void DateTime::setHour(int hour) {
 	else throw DateTimeError::HOUR;
 }
 
+int DateTime::getHour() const {
+	return hour_;
+}
+
 void DateTime::setDay(int day) {
 	if (day >= 1 && day <= 31)
 		day_ = day;
 	else throw DateTimeError::DAY;
+}
+
+int DateTime::getDay() const {
+	return day_;
 }
 
 void DateTime::setMonth(int month) {
@@ -50,10 +66,18 @@ void DateTime::setMonth(int month) {
 	else throw DateTimeError::MONTH;
 }
 
+int DateTime::getMonth() const {
+	return month_;
+}
+
 void DateTime::setYear(int year) {
 	if (year >= YEAR_MIN && year <= YEAR_MAX)
 		year_ = year;
 	else throw DateTimeError::YEAR;
+}
+
+int DateTime::getYear() const {
+	return year_;
 }
 
 std::string DateTime::ToString() const {
