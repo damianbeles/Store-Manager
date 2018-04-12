@@ -1,6 +1,6 @@
 #include "Order.hpp"
 
-Order::Order(std::string startDate, std::string endDate, std::string customer, std::list<std::shared_ptr<Product>> productList, OrderType orderType)
+Order::Order(DateTime startDate, DateTime endDate, std::string customer, std::list<std::shared_ptr<Product>> productList, OrderType orderType)
 	: startDate_(startDate)
 	, endDate_(endDate)
 	, customer_(customer)
@@ -16,19 +16,19 @@ void Order::setCustomer(std::string customer) {
 	customer_ = customer;
 }
 
-std::string Order::getEndDate() const {
+DateTime Order::getEndDate() const {
 	return endDate_;
 }
 
-void Order::setEndDate(std::string endDate) {
+void Order::setEndDate(DateTime endDate) {
 	endDate_ = endDate;
 }
 
-std::string Order::getStartDate() const {
+DateTime Order::getStartDate() const {
 	return startDate_;
 }
 
-void Order::setStartDate(std::string startDate) {
+void Order::setStartDate(DateTime startDate) {
 	startDate_ = startDate;
 }
 
