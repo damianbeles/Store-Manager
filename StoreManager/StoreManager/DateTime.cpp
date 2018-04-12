@@ -83,3 +83,26 @@ int DateTime::getYear() const {
 std::string DateTime::ToString() const {
 	return std::to_string(hour_) + ":" + std::to_string(minute_) + ":" + std::to_string(second_) + " " + std::to_string(day_) + "/" + std::to_string(month_) + "/" + std::to_string(year_);
 }
+
+std::tm DateTime::ToCTime() const {
+	std::tm cTime = { 0 };
+	cTime.tm_sec = second_;
+	cTime.tm_min = minute_;
+	cTime.tm_hour = hour_;
+	cTime.tm_mday = day_;
+	cTime.tm_mon = month_ - 1;
+	cTime.tm_year = year_ - 1900;
+	return cTime;
+}
+
+DateTime DateTime::operator-(const DateTime &other) {
+	std::tm firstDate = ToCTime();
+	std::tm secondDate = other.ToCTime();
+
+	std::time_t firstTime = std::mktime(&firstDate);
+	std::time_t secondTime = std::mktime(&secondDate);
+
+	int difference = std::difftime(firstTime, secondTime);
+
+	return DateTime(difference % 60, (difference / 60) % 60, (difference / 3600) % 24, difference / (3600 * 24), 0, 0);
+}

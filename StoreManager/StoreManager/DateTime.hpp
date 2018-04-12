@@ -1,4 +1,5 @@
 #pragma once
+#include <ctime>
 #include <string>
 
 #define YEAR_MIN 1800
@@ -29,6 +30,10 @@ public:
 	int getYear() const;
 
 	std::string ToString() const;
+
+	std::tm ToCTime() const;
+
+	DateTime operator-(const DateTime &);
 
 private:
 	int second_;
