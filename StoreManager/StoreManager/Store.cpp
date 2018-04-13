@@ -4,6 +4,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <algorithm>
 
 Store::Store(std::string name, Coordinates coordinates)
 	: name_(name)
@@ -73,4 +74,8 @@ Store& Store::operator+=(const std::shared_ptr<Product> &product) {
 Store& Store::operator+=(const std::shared_ptr<Order> &order) {
 	this->orderList_.emplace_back(order);
 	return *this;
+}
+
+bool Store::isProductInStore(std::string barCode) const {
+	return std::find_if(productList_.begin(), productList_.end(), [barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; }) != productList_.end();
 }

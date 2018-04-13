@@ -28,6 +28,7 @@ public:
 
 	void showSolvedOrdersOlderThan(int) const;
 	void showProductsWhichAmountIsLessThan(int) const;
+	bool isProductInStore(std::string) const;
 
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator+=(const std::shared_ptr<Order> &);
