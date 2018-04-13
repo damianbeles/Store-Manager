@@ -34,18 +34,35 @@ void Store::setCoordinates(Coordinates coordinates) {
 	coordinates_ = coordinates;
 }
 
-void Store::showSolvedOrdersOlderThan(unsigned int days) const {
+void Store::showSolvedOrdersOlderThan(int days) const {
 	std::time_t tm = std::time(0);
 	std::tm *now = std::localtime(&tm);
 
 	DateTime currentDate(now->tm_sec, now->tm_min, now->tm_hour, now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
 	
-	std::cout << "Solved orders which are older than " << days << " days:\n\n";
+	int exist = 0;
+	std::cout << "Solved orders which are older than " << days << " days:\n";
 	for (auto it : orderList_) {
-		if (it->getEndDate() - currentDate >= (int)days)
-			std::cout << *it << days;
-		std::cout << "\n";
+		if (it->getEndDate() - currentDate >= days && (exist = 1))
+			std::cout << *it;
 	}
+
+	if (exist == 0)
+		std::cout << "There are no such orders!\n";
+	std::cout << "\n";
+}
+
+void Store::showProductsWhichAmountIsLessThan(int amount) const {
+	int exist = 0;
+	std::cout << "Products which amount is less than " << amount << ": \n";
+	for (auto it : productList_) {
+		if (it->getAmount() < amount && (exist = 1))
+			std::cout << *it << " " << it->getAmount() << "\n";
+	}
+
+	if (exist == 0)
+		std::cout << "There are no such products!\n";
+	std::cout << "\n";
 }
 
 Store& Store::operator+=(const std::shared_ptr<Product> &product) {

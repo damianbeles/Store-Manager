@@ -26,7 +26,8 @@ public:
 	Coordinates getCoordinates() const;
 	void setCoordinates(Coordinates);
 
-	void showSolvedOrdersOlderThan(unsigned int) const;
+	void showSolvedOrdersOlderThan(int) const;
+	void showProductsWhichAmountIsLessThan(int) const;
 
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator+=(const std::shared_ptr<Order> &);
