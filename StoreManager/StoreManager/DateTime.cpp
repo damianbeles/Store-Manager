@@ -94,5 +94,5 @@ int DateTime::operator-(const DateTime &other) {
 	std::time_t firstTime = std::mktime(&firstDate);
 	std::time_t secondTime = std::mktime(&secondDate);
 
-	return abs(floor(std::difftime(firstTime, secondTime) / (60 * 60 * 24)));
+	return int(abs(floor(std::difftime(firstTime, secondTime) / (60 * 60 * 24))));
 }

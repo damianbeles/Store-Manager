@@ -1,11 +1,13 @@
 #include "stdafx.h"
+#pragma warning(disable : 4996)
 #include "Store.hpp"
 
-Store::Store(std::list<std::shared_ptr<Product>> productList, std::string name, Coordinates coordinates, std::list<std::shared_ptr<Order>> orderList)
-	: productList_(productList)
-	, name_(name)
+#include <ctime>
+#include <iostream>
+
+Store::Store(std::string name, Coordinates coordinates)
+	: name_(name)
 	, coordinates_(coordinates)
-	, orderList_(orderList)
 {}
 
 std::list<std::shared_ptr<Product>> Store::getProductList() const {
@@ -30,4 +32,28 @@ Coordinates Store::getCoordinates() const {
 
 void Store::setCoordinates(Coordinates coordinates) {
 	coordinates_ = coordinates;
+}
+
+void Store::showSolvedOrdersOlderThan(unsigned int days) const {
+	std::time_t tm = std::time(0);
+	std::tm *now = std::localtime(&tm);
+
+	DateTime currentDate(now->tm_sec, now->tm_min, now->tm_hour, now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+
+	std::cout << "Orders that are older than " << days << " days:";
+	for (auto it : orderList_) {
+		if (it->getEndDate() - currentDate >= (int)days)
+			std::cout << *it;
+		std::cout << "\n";
+	}
+}
+
+Store& Store::operator+=(const std::shared_ptr<Product> &product) {
+	this->productList_.emplace_back(product);
+	return *this;
+}
+
+Store& Store::operator+=(const std::shared_ptr<Order> &order) {
+	this->orderList_.emplace_back(order);
+	return *this;
 }

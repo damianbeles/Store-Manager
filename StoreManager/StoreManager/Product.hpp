@@ -3,7 +3,7 @@
 
 class Product {
 public:
-	Product(std::string, int, int);
+	Product(std::string, int, double);
 
 	void setBarCode(std::string);
 	std::string getBarCode() const;
@@ -11,11 +11,14 @@ public:
 	void setAmount(int);
 	int getAmount() const;
 	
-	void setPricePerPiece(int);
-	int getPricePerPiece() const;
+	void setPricePerPiece(double);
+	double getPricePerPiece() const;
+
+
+	friend std::ostream &operator<<(std::ostream&, const Product&);
 
 private:
 	std::string barCode_;
 	int amount_;
-	int pricePerPiece_;
+	double pricePerPiece_;
 };

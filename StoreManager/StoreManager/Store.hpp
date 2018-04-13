@@ -5,8 +5,8 @@
 #include "Product.hpp"
 
 struct Coordinates {
-	int longitude_, latitude_;
-	Coordinates(int longitude, int latitude) {
+	double longitude_, latitude_;
+	Coordinates(double longitude, double latitude) {
 		longitude_ = longitude;
 		latitude_ = latitude;
 	}
@@ -14,7 +14,7 @@ struct Coordinates {
 
 class Store {
 public:
-	Store(std::list<std::shared_ptr<Product>>, std::string, Coordinates, std::list<std::shared_ptr<Order>>);
+	Store(std::string, Coordinates);
 
 	std::list<std::shared_ptr<Product>> getProductList() const;
 
@@ -25,6 +25,11 @@ public:
 
 	Coordinates getCoordinates() const;
 	void setCoordinates(Coordinates);
+
+	void showSolvedOrdersOlderThan(unsigned int) const;
+
+	Store& operator+=(const std::shared_ptr<Product> &);
+	Store& operator+=(const std::shared_ptr<Order> &);
 
 private:
 	std::list<std::shared_ptr<Product>> productList_;

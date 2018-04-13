@@ -3,13 +3,12 @@
 #include <list>
 #include <memory>
 #include "Product.hpp"
-#include <string>
 
 enum class OrderType { RECEIVING, SHIPPING };
 
 class Order {
 public:
-	Order(DateTime, DateTime, std::string, std::list<std::shared_ptr<Product>>, OrderType);
+	Order(DateTime, DateTime, std::string, OrderType);
 
 	void setStartDate(DateTime);
 	DateTime getStartDate() const;
@@ -24,6 +23,10 @@ public:
 
 	void setOrderType(OrderType);
 	OrderType getOrderType() const;
+
+	Order& operator+=(const std::shared_ptr<Product> &);
+	friend std::ostream &operator<<(std::ostream&, const Order&);
+	
 private:
 	DateTime startDate_;
 	DateTime endDate_;

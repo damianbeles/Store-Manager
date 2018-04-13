@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Product.hpp"
 
-Product::Product(std::string barCode, int amount, int pricePerPiece)
+Product::Product(std::string barCode, int amount, double pricePerPiece)
 	: barCode_(barCode)
 	, amount_(amount)
 	, pricePerPiece_(pricePerPiece)
@@ -23,10 +23,15 @@ std::string Product::getBarCode() const {
 	return barCode_;
 }
 
-void Product::setPricePerPiece(int pricePerPiece) {
+void Product::setPricePerPiece(double pricePerPiece) {
 	pricePerPiece_ = pricePerPiece;
 }
 
-int Product::getPricePerPiece() const {
+double Product::getPricePerPiece() const {
 	return pricePerPiece_;
+}
+
+std::ostream& operator<<(std::ostream& os, const Product& product) {
+	os << "#" << product.barCode_ << " " << product.pricePerPiece_ << "$";
+	return os;
 }

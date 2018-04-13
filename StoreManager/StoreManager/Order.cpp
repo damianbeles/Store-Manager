@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Order.hpp"
 
-Order::Order(DateTime startDate, DateTime endDate, std::string customer, std::list<std::shared_ptr<Product>> productList, OrderType orderType)
+#include <iostream>
+
+Order::Order(DateTime startDate, DateTime endDate, std::string customer, OrderType orderType)
 	: startDate_(startDate)
 	, endDate_(endDate)
 	, customer_(customer)
-	, productList_(productList)
 	, orderType_(orderType)
 {}
 
@@ -45,3 +46,19 @@ void Order::setOrderType(OrderType orderType) {
 	orderType_ = orderType;
 }
 
+std::ostream& operator<<(std::ostream& os, const Order& order)
+{
+	os << "Customer: " << order.customer_ << "\n";
+	os << "Launch date: " << order.startDate_.ToString() << " \n";
+	os << "Solve date: " << order.endDate_.ToString() << " \n";
+	(order.orderType_ == OrderType::RECEIVING) ? os << "Receiving\n" : os << "Shipping\n";
+	os << "Product List:\n";
+	for (auto it : order.productList_)
+		os << *it << "\n";
+	return os;
+}
+
+Order& Order::operator+=(const std::shared_ptr<Product> &product) {
+	this->productList_.emplace_back(product);
+	return *this;
+}
