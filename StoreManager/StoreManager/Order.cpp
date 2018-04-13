@@ -51,7 +51,7 @@ std::ostream& operator<<(std::ostream& os, const Order& order)
 	os << "Customer: " << order.customer_ << "\n";
 	os << "Launch date: " << order.startDate_.ToString() << " \n";
 	os << "Solve date: " << order.endDate_.ToString() << " \n";
-	(order.orderType_ == OrderType::RECEIVING) ? os << "Receiving\n" : os << "Shipping\n";
+	os << "Order Type: ";  (order.orderType_ == OrderType::RECEIVING) ? os << "Receiving\n" : os << "Shipping\n";
 	os << "Product List:\n";
 	for (auto it : order.productList_)
 		os << *it << "\n";

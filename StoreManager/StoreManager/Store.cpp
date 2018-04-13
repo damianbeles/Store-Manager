@@ -39,11 +39,11 @@ void Store::showSolvedOrdersOlderThan(unsigned int days) const {
 	std::tm *now = std::localtime(&tm);
 
 	DateTime currentDate(now->tm_sec, now->tm_min, now->tm_hour, now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
-
-	std::cout << "Orders that are older than " << days << " days:";
+	
+	std::cout << "Solved orders which are older than " << days << " days:\n\n";
 	for (auto it : orderList_) {
 		if (it->getEndDate() - currentDate >= (int)days)
-			std::cout << *it;
+			std::cout << *it << days;
 		std::cout << "\n";
 	}
 }
