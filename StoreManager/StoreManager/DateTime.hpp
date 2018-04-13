@@ -5,7 +5,7 @@
 #define YEAR_MIN 1800
 #define YEAR_MAX 9999
 
-enum class DateTimeError {SECOND, MINUTE, HOUR, DAY, MONTH, YEAR};
+enum class DateTimeError { SECOND, MINUTE, HOUR, DAY, MONTH, YEAR };
 
 class DateTime {
 public:
@@ -31,9 +31,7 @@ public:
 
 	std::string ToString() const;
 
-	std::tm ToCTime() const;
-
-	DateTime operator-(const DateTime &);
+	int operator-(const DateTime &);
 
 private:
 	int second_;

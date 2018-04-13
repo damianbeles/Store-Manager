@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Product.hpp"
 
 Product::Product(std::string barCode, int amount, int pricePerPiece)

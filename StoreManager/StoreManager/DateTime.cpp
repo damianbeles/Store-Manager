@@ -1,4 +1,7 @@
+#include "stdafx.h"
 #include "DateTime.hpp"
+
+#include <ctime>
 
 DateTime::DateTime(int second, int minute, int hour, int day, int month, int year) {
 	setSecond(second);
@@ -84,25 +87,12 @@ std::string DateTime::ToString() const {
 	return std::to_string(hour_) + ":" + std::to_string(minute_) + ":" + std::to_string(second_) + " " + std::to_string(day_) + "/" + std::to_string(month_) + "/" + std::to_string(year_);
 }
 
-std::tm DateTime::ToCTime() const {
-	std::tm cTime = { 0 };
-	cTime.tm_sec = second_;
-	cTime.tm_min = minute_;
-	cTime.tm_hour = hour_;
-	cTime.tm_mday = day_;
-	cTime.tm_mon = month_ - 1;
-	cTime.tm_year = year_ - 1900;
-	return cTime;
-}
-
-DateTime DateTime::operator-(const DateTime &other) {
-	std::tm firstDate = ToCTime();
-	std::tm secondDate = other.ToCTime();
+int DateTime::operator-(const DateTime &other) {
+	std::tm firstDate = { second_, minute_, hour_, day_, month_ - 1, year_ + 71 - 1900 };
+	std::tm secondDate = { other.second_, other.minute_, other.hour_, other.day_, other.month_ - 1, other.year_ + 71 - 1900 };
 
 	std::time_t firstTime = std::mktime(&firstDate);
 	std::time_t secondTime = std::mktime(&secondDate);
 
-	int difference = std::difftime(firstTime, secondTime);
-
-	return DateTime(difference % 60, (difference / 60) % 60, (difference / 3600) % 24, difference / (3600 * 24), 0, 0);
+	return abs(floor(std::difftime(firstTime, secondTime) / (60 * 60 * 24)));
 }

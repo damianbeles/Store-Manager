@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Order.hpp"
 
 Order::Order(DateTime startDate, DateTime endDate, std::string customer, std::list<std::shared_ptr<Product>> productList, OrderType orderType)

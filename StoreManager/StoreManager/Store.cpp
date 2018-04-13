@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Store.hpp"
 
 Store::Store(std::list<std::shared_ptr<Product>> productList, std::string name, Coordinates coordinates, std::list<std::shared_ptr<Order>> orderList)
