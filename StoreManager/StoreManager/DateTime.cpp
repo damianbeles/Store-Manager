@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "DateTime.hpp"
 
-#include <ctime>
-
 DateTime::DateTime(int second, int minute, int hour, int day, int month, int year) {
 	setSecond(second);
 	setMinute(minute);

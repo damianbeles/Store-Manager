@@ -79,3 +79,12 @@ Store& Store::operator+=(const std::shared_ptr<Order> &order) {
 bool Store::isProductInStore(std::string barCode) const {
 	return std::find_if(productList_.begin(), productList_.end(), [barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; }) != productList_.end();
 }
+
+int Store::getNumberOfSolvedOrdersInYear(int year) const {
+	int result = 0;
+	for (auto it : orderList_) {
+		if (it->getEndDate().getYear() == year)
+			result++;
+	}
+	return result;
+}
