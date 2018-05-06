@@ -15,7 +15,7 @@ std::list<std::shared_ptr<Product>> Store::getProductList() const {
 	return productList_;
 }
 
-std::list<std::shared_ptr<Order>> Store::getOrderList() const {
+std::list<std::unique_ptr<Order>> const& Store::getOrderList() const {
 	return orderList_;
 }
 
@@ -43,7 +43,7 @@ void Store::showSolvedOrdersOlderThan(int days) const {
 	
 	int exist = 0;
 	std::cout << "Solved orders which are older than " << days << " days:\n";
-	for (auto it : orderList_) {
+	for (const auto &it : orderList_) {
 		if (it->getEndDate() - currentDate >= days && (exist = 1))
 			std::cout << *it;
 	}
@@ -71,8 +71,8 @@ Store& Store::operator+=(const std::shared_ptr<Product> &product) {
 	return *this;
 }
 
-Store& Store::operator+=(const std::shared_ptr<Order> &order) {
-	this->orderList_.emplace_back(order);
+Store& Store::operator+=(std::unique_ptr<Order> order) {
+	this->orderList_.emplace_back(std::move(order));
 	return *this;
 }
 
@@ -82,7 +82,7 @@ bool Store::isProductInStore(std::string barCode) const {
 
 int Store::getNumberOfSolvedOrdersInYear(int year) const {
 	int result = 0;
-	for (auto it : orderList_) {
+	for (const auto &it : orderList_) {
 		if (it->getEndDate().getYear() == year)
 			result++;
 	}

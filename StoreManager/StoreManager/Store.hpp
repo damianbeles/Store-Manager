@@ -18,7 +18,7 @@ public:
 
 	std::list<std::shared_ptr<Product>> getProductList() const;
 
-	std::list<std::shared_ptr<Order>> getOrderList() const;
+	std::list<std::unique_ptr<Order>> const& getOrderList() const;
 
 	std::string getName() const;
 	void setName(std::string);
@@ -32,11 +32,11 @@ public:
 	int getNumberOfSolvedOrdersInYear(int) const;
 
 	Store& operator+=(const std::shared_ptr<Product> &);
-	Store& operator+=(const std::shared_ptr<Order> &);
+	Store& operator+=(std::unique_ptr<Order>);
 
 private:
 	std::list<std::shared_ptr<Product>> productList_;
 	std::string name_;
 	Coordinates coordinates_;
-	std::list<std::shared_ptr<Order>> orderList_;
+	std::list<std::unique_ptr<Order>> orderList_;
 };
