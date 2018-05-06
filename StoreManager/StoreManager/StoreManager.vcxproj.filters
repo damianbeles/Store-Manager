@@ -33,6 +33,9 @@
     <ClInclude Include="DateTime.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Stores.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DateTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
