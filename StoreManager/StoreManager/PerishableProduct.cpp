@@ -5,3 +5,7 @@ PerishableProduct::PerishableProduct(std::string barCode, int amount, double pri
 	: Product(barCode, amount, pricePerPiece, type)
 	, expiration_(expiration)
 {}
+
+DateTime PerishableProduct::getExpirationDate() const {
+	return expiration_;
+}

@@ -32,6 +32,9 @@ public:
 	std::string ToString() const;
 
 	int operator-(const DateTime &);
+	int operator>(const DateTime &);
+
+	static DateTime getCurrentDate();
 
 private:
 	int second_;

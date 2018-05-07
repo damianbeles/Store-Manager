@@ -42,6 +42,8 @@ public:
 	int getNumberOfNonPerishableProducts() const;
 	int getNumberOfPerishableProducts() const;
 
+	void showExpiredProducts() const;
+
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator+=(std::unique_ptr<Order>);
 

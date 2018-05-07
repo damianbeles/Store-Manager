@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#pragma warning(disable : 4996)
 #include "Store.hpp"
 
 #include <ctime>
@@ -40,10 +39,7 @@ void Store::setCoordinates(Coordinates coordinates) {
 }
 
 void Store::showSolvedOrdersOlderThan(int days) const {
-	std::time_t tm = std::time(0);
-	std::tm *now = std::localtime(&tm);
-
-	DateTime currentDate(now->tm_sec, now->tm_min, now->tm_hour, now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+	DateTime currentDate = DateTime::getCurrentDate();
 	
 	int exist = 0;
 	std::cout << "Solved orders which are older than " << days << " days:\n";
@@ -53,8 +49,7 @@ void Store::showSolvedOrdersOlderThan(int days) const {
 	}
 
 	if (exist == 0)
-		std::cout << "There are no such orders!\n";
-	std::cout << "\n";
+		std::cout << "There are no such orders!\n\n";
 }
 
 void Store::showProductsWhichAmountIsLessThan(int amount) const {
@@ -109,4 +104,18 @@ int Store::getNumberOfNonPerishableProducts() const {
 
 int Store::getNumberOfPerishableProducts() const {
 	return numberOfPerishableProducts_;
+}
+
+void Store::showExpiredProducts() const {
+	std::string expiredProducts = "";
+	for (auto it : productList_) {
+		if (it->getTypeOfProduct() == TypeOfProduct::NonAlimentary || it->getTypeOfProduct() == TypeOfProduct::Alimentary) {
+			PerishableProduct *perishableProduct = dynamic_cast<PerishableProduct*>(&*it);
+			if (DateTime::getCurrentDate() > perishableProduct->getExpirationDate()) {
+				expiredProducts += "#" + perishableProduct->getBarCode() + " ";
+			}
+		}
+	}
+	if (expiredProducts == "") std::cout << "There are no expired products in the store!\n";
+	else std::cout << "Expired products are: " + expiredProducts + "\n";
 }
