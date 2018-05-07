@@ -14,4 +14,5 @@ void AlimentaryProduct::showInfoAboutProduct() const{
 		<< "Expires on: " << expiration_.ToString() << "\n"
 		<< "Calories per 100 grams: " << caloriesPerOneHundredGrams_ << "\n";
 	isBiological_ == Biological::YES ? std::cout << "Biological: Yes!\n" : std::cout << "Biological: No!\n";
+	std::cout << "The product is perishable!\n";
 }

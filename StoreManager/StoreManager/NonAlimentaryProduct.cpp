@@ -11,5 +11,6 @@ void NonAlimentaryProduct::showInfoAboutProduct() const {
 	std::cout << "#" << barCode_ << " "
 		<< pricePerPiece_ << "$\n"
 		<< "Expires on: " << expiration_.ToString() << "\n"
-		<< "Toxicity Grade: " << toxicityGrade_ << "\n";
+		<< "Toxicity Grade: " << toxicityGrade_ << "\n"
+		<< "The product is perishable!\n";
 }

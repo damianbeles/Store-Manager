@@ -4,6 +4,7 @@
 #include "Order.hpp"
 #include "AlimentaryProduct.hpp"
 #include "NonAlimentaryProduct.hpp"
+#include "NonPerishableProduct.hpp"
 
 
 struct Coordinates {

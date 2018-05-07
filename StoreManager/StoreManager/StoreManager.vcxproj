@@ -150,6 +150,7 @@
     <ClInclude Include="AlimentaryProduct.hpp" />
     <ClInclude Include="DateTime.hpp" />
     <ClInclude Include="NonAlimentaryProduct.hpp" />
+    <ClInclude Include="NonPerishableProduct.hpp" />
     <ClInclude Include="Order.hpp" />
     <ClInclude Include="PerishableProduct.hpp" />
     <ClInclude Include="Product.hpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="AlimentaryProduct.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="NonAlimentaryProduct.cpp" />
+    <ClCompile Include="NonPerishableProduct.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="PerishableProduct.cpp" />
     <ClCompile Include="Product.cpp" />
