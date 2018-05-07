@@ -9,7 +9,11 @@
 Store::Store(std::string name, Coordinates coordinates)
 	: name_(name)
 	, coordinates_(coordinates)
-{}
+{
+	numberOfNonAlimentaryProducts_ = 0;
+	numberOfNonPerishableProducts_ = 0;
+	numberOfPerishableProducts_ = 0;
+}
 
 std::list<std::shared_ptr<Product>> Store::getProductList() const {
 	return productList_;
@@ -68,6 +72,12 @@ void Store::showProductsWhichAmountIsLessThan(int amount) const {
 
 Store& Store::operator+=(const std::shared_ptr<Product> &product) {
 	this->productList_.emplace_back(product);
+	switch (product->getTypeOfProduct())
+	{
+	case TypeOfProduct::NonPerishable: numberOfNonPerishableProducts_++; break;
+	case TypeOfProduct::NonAlimentary: numberOfNonAlimentaryProducts_++; numberOfPerishableProducts_++; break;
+	case TypeOfProduct::Alimentary: numberOfPerishableProducts_++; break;
+	}
 	return *this;
 }
 
@@ -87,4 +97,16 @@ int Store::getNumberOfSolvedOrdersInYear(int year) const {
 			result++;
 	}
 	return result;
+}
+
+int Store::getNumberOfNonAlimentaryProducts() const {
+	return numberOfNonAlimentaryProducts_;
+}
+
+int Store::getNumberOfNonPerishableProducts() const {
+	return numberOfNonPerishableProducts_;
+}
+
+int Store::getNumberOfPerishableProducts() const {
+	return numberOfPerishableProducts_;
 }

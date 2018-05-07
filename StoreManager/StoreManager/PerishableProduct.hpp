@@ -4,7 +4,7 @@
 
 class PerishableProduct : public Product {
 public:
-	PerishableProduct(std::string, int, double, DateTime);
+	PerishableProduct(std::string, int, double, DateTime, TypeOfProduct);
 
 	virtual void showInfoAboutProduct() const = 0;
 

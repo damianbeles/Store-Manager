@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Product.hpp"
 
-Product::Product(std::string barCode, int amount, double pricePerPiece)
+Product::Product(std::string barCode, int amount, double pricePerPiece, TypeOfProduct type)
 	: barCode_(barCode)
 	, amount_(amount)
 	, pricePerPiece_(pricePerPiece)
+	, type_(type)
 {}
 
 void Product::setAmount(int amount) {
@@ -34,4 +35,8 @@ double Product::getPricePerPiece() const {
 std::ostream& operator<<(std::ostream& os, const Product& product) {
 	product.showInfoAboutProduct();
 	return os;
+}
+
+TypeOfProduct Product::getTypeOfProduct() const {
+	return type_;
 }

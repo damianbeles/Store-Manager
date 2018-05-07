@@ -34,3 +34,25 @@ void Stores::showStoresWithMostOrdersSolvedInYear(int year) {
 	}
 	else std::cout << "There are no stores with orders solved in that year!\n";
 }
+
+void Stores::showTheStoresWithMostNonAlimentaryProducts() {
+	std::vector<std::string> storesWithMostNonAlimentaryProducts;
+	int maxNonAlimentaryProducts = 0;
+	for (const auto &it : storeList_) {
+		if (it->getNumberOfNonAlimentaryProducts() > maxNonAlimentaryProducts) {
+			maxNonAlimentaryProducts = it->getNumberOfNonAlimentaryProducts();
+			storesWithMostNonAlimentaryProducts.clear();
+		}
+		if (it->getNumberOfNonAlimentaryProducts() == maxNonAlimentaryProducts) {
+			storesWithMostNonAlimentaryProducts.push_back(it->getName());
+		}
+	}
+
+	if (maxNonAlimentaryProducts) {
+		std::cout << "Stores with a number of " << maxNonAlimentaryProducts << " nonalimentary products are:\n";
+		for (auto it : storesWithMostNonAlimentaryProducts) {
+			std::cout << it << "\n";
+		}
+	}
+	else std::cout << "There are no nonalimentary products in any store!\n";
+}

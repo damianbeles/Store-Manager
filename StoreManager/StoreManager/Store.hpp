@@ -34,6 +34,14 @@ public:
 	bool isProductInStore(std::string) const;
 	int getNumberOfSolvedOrdersInYear(int) const;
 
+	int numberOfNonAlimentaryProducts_;
+	int numberOfNonPerishableProducts_;
+	int numberOfPerishableProducts_;
+
+	int getNumberOfNonAlimentaryProducts() const;
+	int getNumberOfNonPerishableProducts() const;
+	int getNumberOfPerishableProducts() const;
+
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator+=(std::unique_ptr<Order>);
 

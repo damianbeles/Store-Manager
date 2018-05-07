@@ -3,7 +3,7 @@
 #include <iostream>
 
 NonAlimentaryProduct::NonAlimentaryProduct(std::string barCode, int amount, double pricePerPiece, DateTime expiration, double toxicityGrade)
-	: PerishableProduct(barCode, amount, pricePerPiece, expiration)
+	: PerishableProduct(barCode, amount, pricePerPiece, expiration, TypeOfProduct::NonAlimentary)
 	, toxicityGrade_(toxicityGrade)
 {}
 

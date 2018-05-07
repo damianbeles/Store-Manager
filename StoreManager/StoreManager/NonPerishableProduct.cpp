@@ -3,10 +3,10 @@
 #include <iostream>
 
 NonPerishableProduct::NonPerishableProduct(std::string barCode, int amount, double pricePerPiece)
-	: Product(barCode, amount, pricePerPiece)
+	: Product(barCode, amount, pricePerPiece, TypeOfProduct::NonPerishable)
 {}
 
-void NonPerishableProduct::showInfoAboutProduct() const{
+void NonPerishableProduct::showInfoAboutProduct() const {
 	std::cout << "#" << barCode_ << " "
 		<< pricePerPiece_ << "$\n"
 		<< "The product is nonperishable!\n";

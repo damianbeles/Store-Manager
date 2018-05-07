@@ -3,7 +3,7 @@
 #include <iostream>
 
 AlimentaryProduct::AlimentaryProduct(std::string barCode, int amount, double pricePerPiece, DateTime expiration, double caloriesPerOneHundredGrams, Biological isBiological)
-	: PerishableProduct(barCode, amount, pricePerPiece, expiration)
+	: PerishableProduct(barCode, amount, pricePerPiece, expiration, TypeOfProduct::Alimentary)
 	, caloriesPerOneHundredGrams_(caloriesPerOneHundredGrams)
 	, isBiological_(isBiological)
 {}
