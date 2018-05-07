@@ -147,8 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AlimentaryProduct.hpp" />
     <ClInclude Include="DateTime.hpp" />
     <ClInclude Include="Order.hpp" />
+    <ClInclude Include="PerishableProduct.hpp" />
     <ClInclude Include="Product.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Store.hpp" />
@@ -156,8 +158,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlimentaryProduct.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="PerishableProduct.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

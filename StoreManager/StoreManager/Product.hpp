@@ -14,10 +14,10 @@ public:
 	void setPricePerPiece(double);
 	double getPricePerPiece() const;
 
-
+	virtual void showInfoAboutProduct() const = 0;
 	friend std::ostream &operator<<(std::ostream&, const Product&);
 
-private:
+protected:
 	std::string barCode_;
 	int amount_;
 	double pricePerPiece_;

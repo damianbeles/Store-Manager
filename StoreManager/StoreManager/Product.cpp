@@ -32,6 +32,6 @@ double Product::getPricePerPiece() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Product& product) {
-	os << "#" << product.barCode_ << " " << product.pricePerPiece_ << "$";
+	product.showInfoAboutProduct();
 	return os;
 }

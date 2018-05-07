@@ -36,6 +36,12 @@
     <ClInclude Include="Stores.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PerishableProduct.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlimentaryProduct.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Stores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PerishableProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlimentaryProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

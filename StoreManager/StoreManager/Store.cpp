@@ -58,7 +58,7 @@ void Store::showProductsWhichAmountIsLessThan(int amount) const {
 	std::cout << "Products which amount is less than " << amount << ": \n";
 	for (auto it : productList_) {
 		if (it->getAmount() < amount && (exist = 1))
-			std::cout << *it << " " << it->getAmount() << "\n";
+			std::cout << *it << "The amount is: " << it->getAmount() << "\n";
 	}
 
 	if (exist == 0)

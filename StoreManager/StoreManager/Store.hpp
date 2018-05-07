@@ -2,7 +2,8 @@
 #include <list>
 #include <memory>
 #include "Order.hpp"
-#include "Product.hpp"
+#include "AlimentaryProduct.hpp"
+
 
 struct Coordinates {
 	double longitude_, latitude_;
