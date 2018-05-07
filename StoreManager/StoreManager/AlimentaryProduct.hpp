@@ -1,13 +1,15 @@
 #pragma once
 #include "PerishableProduct.hpp"
 
+enum class Biological { NO, YES };
+
 class AlimentaryProduct : public PerishableProduct {
 public:
-	AlimentaryProduct(std::string, int, double, DateTime, double, bool);
+	AlimentaryProduct(std::string, int, double, DateTime, double, Biological);
 
 	void showInfoAboutProduct() const;
 
 private:
 	double caloriesPerOneHundredGrams_;
-	bool isBiological_;
+	Biological isBiological_;
 };
