@@ -3,6 +3,7 @@
 #include <memory>
 #include "Order.hpp"
 #include "AlimentaryProduct.hpp"
+#include "NonAlimentaryProduct.hpp"
 
 
 struct Coordinates {

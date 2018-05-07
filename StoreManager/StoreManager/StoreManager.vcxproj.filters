@@ -42,6 +42,9 @@
     <ClInclude Include="AlimentaryProduct.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="NonAlimentaryProduct.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AlimentaryProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NonAlimentaryProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

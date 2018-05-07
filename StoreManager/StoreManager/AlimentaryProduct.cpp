@@ -9,8 +9,9 @@ AlimentaryProduct::AlimentaryProduct(std::string barCode, int amount, double pri
 {}
 
 void AlimentaryProduct::showInfoAboutProduct() const{
-	std::cout << "#" << barCode_ << " " 
+	std::cout << "#" << barCode_ << " "
 		<< pricePerPiece_ << "$\n"
-		<< "Expires on:" << expiration_.ToString() << "\n";
+		<< "Expires on: " << expiration_.ToString() << "\n"
+		<< "Calories per 100 grams: " << caloriesPerOneHundredGrams_ << "\n";
 	isBiological_ == Biological::YES ? std::cout << "Biological: Yes!\n" : std::cout << "Biological: No!\n";
 }
