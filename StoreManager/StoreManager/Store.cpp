@@ -76,6 +76,12 @@ Store& Store::operator+=(const std::shared_ptr<Product> &product) {
 	return *this;
 }
 
+Store& Store::operator-=(std::string barCode) {
+	this->productList_.remove_if([barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; });
+	return *this;
+}
+
+
 Store& Store::operator+=(std::unique_ptr<Order> order) {
 	this->orderList_.emplace_back(std::move(order));
 	return *this;

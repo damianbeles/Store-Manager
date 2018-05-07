@@ -45,6 +45,7 @@ public:
 	void showExpiredProducts() const;
 
 	Store& operator+=(const std::shared_ptr<Product> &);
+	Store& operator-=(std::string);
 	Store& operator+=(std::unique_ptr<Order>);
 
 private:
