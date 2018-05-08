@@ -67,17 +67,25 @@ void Store::showProductsWhichAmountIsLessThan(int amount) const {
 
 Store& Store::operator+=(const std::shared_ptr<Product> &product) {
 	this->productList_.emplace_back(product);
-	switch (product->getTypeOfProduct())
-	{
+	switch (product->getTypeOfProduct()) {
 	case TypeOfProduct::NonPerishable: numberOfNonPerishableProducts_++; break;
-	case TypeOfProduct::NonAlimentary: numberOfNonAlimentaryProducts_++; numberOfPerishableProducts_++; break;
+	case TypeOfProduct::NonAlimentary: numberOfNonAlimentaryProducts_++;
 	case TypeOfProduct::Alimentary: numberOfPerishableProducts_++; break;
 	}
 	return *this;
 }
 
 Store& Store::operator-=(std::string barCode) {
-	this->productList_.remove_if([barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; });
+	this->productList_.remove_if([this, barCode](std::shared_ptr<Product> product) {
+		if (product->getBarCode() == barCode) {
+			switch (product->getTypeOfProduct()) {
+			case TypeOfProduct::NonPerishable: numberOfNonPerishableProducts_--; break;
+			case TypeOfProduct::NonAlimentary: numberOfNonAlimentaryProducts_--;
+			case TypeOfProduct::Alimentary: numberOfPerishableProducts_--; break;
+			}
+			return true;
+		}
+	});
 	return *this;
 }
 
