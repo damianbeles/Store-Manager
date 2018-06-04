@@ -137,6 +137,18 @@ void Store::showExpiredProducts() const {
 	else std::cout << "Expired products are: " + expiredProducts + "\n";
 }
 
+void Store::sortOrderListBy(SortCriteria sortCriteria) {
+	orderList_.sort([sortCriteria](const std::unique_ptr<Order>& first, const std::unique_ptr<Order>& second) {
+		switch (sortCriteria) {
+			case SortCriteria::StartDate:
+				return !(first->getStartDate() > second->getStartDate());
+			case SortCriteria::EndDate:
+				return !(first->getEndDate() > second->getEndDate());
+		}
+		return false;
+	});
+}
+
 Store& Store::operator+=(std::string storePath) {
 	std::string productsPath = storePath + "\\Products";
 	std::string productTypes[] = { "Alimentary", "Non Alimentary", "Non Perishable" };

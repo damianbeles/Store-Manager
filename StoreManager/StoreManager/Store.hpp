@@ -15,6 +15,8 @@ struct Coordinates {
 	}
 };
 
+enum class SortCriteria{ StartDate, EndDate };
+
 class Store {
 public:
 	Store(std::string, Coordinates);
@@ -45,6 +47,7 @@ public:
 	int getNumberOfPerishableProducts() const;
 
 	void showExpiredProducts() const;
+	void sortOrderListBy(SortCriteria);
 
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator-=(std::string);
