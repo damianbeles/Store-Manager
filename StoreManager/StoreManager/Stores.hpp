@@ -13,6 +13,7 @@ public:
 	void showStoresWithMostOrdersSolvedInYear(int);
 	void showTheStoresWithMostNonAlimentaryProducts();
 	void importData(std::string);
+	void saveData(std::string);
 
 private:
 	std::vector<std::unique_ptr<Store>> storeList_;

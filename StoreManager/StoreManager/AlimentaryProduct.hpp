@@ -9,6 +9,9 @@ public:
 
 	void showInfoAboutProduct() const;
 
+	double getCaloriesPerOneHundredGrams() const;
+	Biological isBiological() const;
+
 private:
 	double caloriesPerOneHundredGrams_;
 	Biological isBiological_;

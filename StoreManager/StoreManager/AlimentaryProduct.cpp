@@ -8,11 +8,19 @@ AlimentaryProduct::AlimentaryProduct(std::string barCode, int amount, double pri
 	, isBiological_(isBiological)
 {}
 
-void AlimentaryProduct::showInfoAboutProduct() const{
+void AlimentaryProduct::showInfoAboutProduct() const {
 	std::cout << "#" << barCode_ << " "
 		<< pricePerPiece_ << "$\n"
 		<< "Expires on: " << expiration_.ToString() << "\n"
 		<< "Calories per 100 grams: " << caloriesPerOneHundredGrams_ << "\n";
 	isBiological_ == Biological::YES ? std::cout << "Biological: Yes!\n" : std::cout << "Biological: No!\n";
 	std::cout << "The product is perishable!\n";
+}
+
+double AlimentaryProduct::getCaloriesPerOneHundredGrams() const {
+	return caloriesPerOneHundredGrams_;
+}
+
+Biological AlimentaryProduct::isBiological() const {
+	return isBiological_;
 }

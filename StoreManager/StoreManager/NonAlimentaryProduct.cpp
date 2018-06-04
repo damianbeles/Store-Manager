@@ -14,3 +14,7 @@ void NonAlimentaryProduct::showInfoAboutProduct() const {
 		<< "Toxicity Grade: " << toxicityGrade_ << "\n"
 		<< "The product is perishable!\n";
 }
+
+double NonAlimentaryProduct::getToxicityGrade() const {
+	return toxicityGrade_;
+}
