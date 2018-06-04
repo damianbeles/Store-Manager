@@ -23,6 +23,8 @@ public:
 
 	std::list<std::unique_ptr<Order>> const& getOrderList() const;
 
+	std::shared_ptr<Product> getProduct(std::string) const;
+
 	std::string getName() const;
 	void setName(std::string);
 
@@ -47,6 +49,7 @@ public:
 	Store& operator+=(const std::shared_ptr<Product> &);
 	Store& operator-=(std::string);
 	Store& operator+=(std::unique_ptr<Order>);
+	Store& operator+=(std::string);
 
 private:
 	std::list<std::shared_ptr<Product>> productList_;

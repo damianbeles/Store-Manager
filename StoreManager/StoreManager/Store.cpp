@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "Store.hpp"
 
-#include <ctime>
-#include <iostream>
 #include <algorithm>
+#include <ctime>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 Store::Store(std::string name, Coordinates coordinates)
 	: name_(name)
@@ -42,7 +44,7 @@ void Store::showSolvedOrdersOlderThan(int days) const {
 	DateTime currentDate = DateTime::getCurrentDate();
 	
 	int exist = 0;
-	std::cout << "Solved orders which are older than " << days << " days:\n";
+	std::cout << "\nSolved orders which are older than " << days << " days:\n\n";
 	for (const auto &it : orderList_) {
 		if (it->getEndDate() - currentDate >= days && (exist = 1))
 			std::cout << *it;
@@ -85,6 +87,7 @@ Store& Store::operator-=(std::string barCode) {
 			}
 			return true;
 		}
+		return false;
 	});
 	return *this;
 }
@@ -132,4 +135,94 @@ void Store::showExpiredProducts() const {
 	}
 	if (expiredProducts == "") std::cout << "There are no expired products in the store!\n";
 	else std::cout << "Expired products are: " + expiredProducts + "\n";
+}
+
+Store& Store::operator+=(std::string storePath) {
+	std::string productsPath = storePath + "\\Products";
+	std::string productTypes[] = { "Alimentary", "Non Alimentary", "Non Perishable" };
+	for (auto &type : productTypes) {
+		for (auto &productFile : std::experimental::filesystem::directory_iterator(productsPath + "\\" + type)) {
+			std::ifstream fin(productFile.path().string());
+
+			std::string barCode = productFile.path().string().substr(productFile.path().string().find_last_of("\\") + 1);
+			barCode = barCode.substr(0, barCode.find("."));
+
+			int amount;
+			double pricePerPiece;
+			fin >> amount >> pricePerPiece;
+
+			if (type == "Alimentary") {
+				int second, minute, hour, day, month, year;
+				fin >> second >> minute >> hour >> day >> month >> year;
+				DateTime expiration(second, minute, hour, day, month, year);
+
+				double caloriesPerOneHundredGrams;
+				fin >> caloriesPerOneHundredGrams;
+
+				Biological biological;
+				bool isBio;
+				fin >> isBio;
+				if (isBio) biological = Biological::YES;
+				else biological = Biological::NO;
+
+				std::shared_ptr<Product> alimentaryProduct = std::make_shared<AlimentaryProduct>(barCode, amount, pricePerPiece, expiration, caloriesPerOneHundredGrams, biological);
+				*this += std::move(alimentaryProduct);
+			}
+			else if (type == "Non Alimentary") {
+				int second, minute, hour, day, month, year;
+				fin >> second >> minute >> hour >> day >> month >> year;
+				DateTime expiration(second, minute, hour, day, month, year);
+
+				double toxicityGrade;
+				fin >> toxicityGrade;
+
+				std::shared_ptr<Product> nonAlimentaryProduct = std::make_shared<NonAlimentaryProduct>(barCode, amount, pricePerPiece, expiration, toxicityGrade);
+				*this += std::move(nonAlimentaryProduct);
+			}
+			else {
+				std::shared_ptr<Product> nonPerishableProduct = std::make_shared<NonPerishableProduct>(barCode, amount, pricePerPiece);
+				*this += std::move(nonPerishableProduct);
+			}
+		}
+	}
+	
+	std::string ordersPath = storePath + "\\Orders";
+	std::string ordersTypes[] = { "Receiving", "Shipping" };
+	for (auto &type : ordersTypes) {
+		for (auto &orderFile : std::experimental::filesystem::directory_iterator(ordersPath + "\\" + type)) {
+			std::ifstream fin(orderFile.path().string());
+
+			int startSecond, endSecond, startMinute, endMinute, startHour, endHour, startDay, endDay, startMonth, endMonth, startYear, endYear;
+			std::string customer;
+
+			fin >> startSecond >> startMinute >> startHour >> startDay >> startMonth >> startYear;
+			fin >> endSecond >> endMinute >> endHour >> endDay >> endMonth >> endYear;
+			std::getline(fin, customer);
+			std::getline(fin, customer);
+
+			DateTime startDate(startSecond, startMinute, startHour, startDay, startMonth, startYear);
+			DateTime endDate(endSecond, endMinute, endHour, endDay, endMonth, endYear);
+
+			OrderType orderType;
+			if (type == "Receiving") orderType = OrderType::RECEIVING;
+			else orderType = OrderType::SHIPPING;
+
+			std::unique_ptr<Order> order = std::make_unique<Order>(startDate, endDate, customer, orderType);
+
+			while (!fin.eof()) {
+				std::string barCode;
+				fin >> barCode;
+
+				*order += this->getProduct(barCode);
+			}
+
+			*this += std::move(order);
+		}
+	}
+	return *this;
+}
+
+std::shared_ptr<Product> Store::getProduct(std::string barCode) const {
+	auto it = std::find_if(productList_.begin(), productList_.end(), [barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; });
+	return *it;
 }

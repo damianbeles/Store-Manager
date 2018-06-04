@@ -1,11 +1,31 @@
 #include "stdafx.h"
 #include "Stores.hpp"
+
+#include <fstream>
+#include <filesystem>
 #include <iostream>
 
 Stores::Stores() {}
 
 Stores& Stores::operator+=(std::unique_ptr<Store> store) {
 	this->storeList_.emplace_back(std::move(store));
+	return *this;
+}
+
+Stores& Stores::operator+=(std::string storePath) {
+	std::string name = storePath.substr(storePath.find_last_of("\\") + 1);
+
+	std::ifstream fin(storePath + "\\coordinates.txt");
+
+	double longitude, latitude;
+	fin >> longitude >> latitude;
+	Coordinates coordinates(longitude, latitude);
+
+	std::unique_ptr<Store> store = std::make_unique<Store>(name, coordinates);
+	*store += storePath;
+
+	*this += std::move(store);
+
 	return *this;
 }
 
@@ -55,4 +75,9 @@ void Stores::showTheStoresWithMostNonAlimentaryProducts() {
 		}
 	}
 	else std::cout << "There are no nonalimentary products in any store!\n";
+}
+
+void Stores::importData(std::string storesPath) {
+	for (auto & store : std::experimental::filesystem::directory_iterator(storesPath))
+		*this += store.path().string();
 }

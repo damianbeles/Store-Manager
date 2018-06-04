@@ -33,9 +33,6 @@
     <ClInclude Include="DateTime.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Stores.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PerishableProduct.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -46,6 +43,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="NonPerishableProduct.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stores.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
