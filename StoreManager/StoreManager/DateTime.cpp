@@ -111,6 +111,16 @@ bool DateTime::operator>(const DateTime &other) {
 	return std::difftime(firstTime, secondTime) / (60 * 60 * 24) > 0;
 }
 
+bool DateTime::operator<(const DateTime &other) {
+	std::tm firstDate = { second_, minute_, hour_, day_, month_ - 1, year_ + 71 - 1900 };
+	std::tm secondDate = { other.second_, other.minute_, other.hour_, other.day_, other.month_ - 1, other.year_ + 71 - 1900 };
+
+	std::time_t firstTime = std::mktime(&firstDate);
+	std::time_t secondTime = std::mktime(&secondDate);
+
+	return std::difftime(firstTime, secondTime) / (60 * 60 * 24) < 0;
+}
+
 DateTime DateTime::getCurrentDate() {
 	std::time_t tm = std::time(0);
 	std::tm *now = std::localtime(&tm);

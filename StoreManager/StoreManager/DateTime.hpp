@@ -33,6 +33,7 @@ public:
 
 	int operator-(const DateTime &);
 	bool operator>(const DateTime &);
+	bool operator<(const DateTime &);
 
 	static DateTime getCurrentDate();
 	static std::string getMonthName(int);
