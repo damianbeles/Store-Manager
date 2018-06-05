@@ -143,11 +143,10 @@ void Store::sortOrderListBy(SortCriteria sortCriteria) {
 	orderList_.sort([sortCriteria](const std::unique_ptr<Order>& first, const std::unique_ptr<Order>& second) {
 		switch (sortCriteria) {
 			case SortCriteria::StartDate:
-				return !(first->getStartDate() > second->getStartDate());
+				return (first->getStartDate() > second->getStartDate());
 			case SortCriteria::EndDate:
-				return !(first->getEndDate() > second->getEndDate());
+				return (first->getEndDate() > second->getEndDate());
 		}
-		return false;
 	});
 }
 

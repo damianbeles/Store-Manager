@@ -32,7 +32,7 @@ public:
 	std::string ToString() const;
 
 	int operator-(const DateTime &);
-	int operator>(const DateTime &);
+	bool operator>(const DateTime &);
 
 	static DateTime getCurrentDate();
 	static std::string getMonthName(int);

@@ -101,7 +101,7 @@ int DateTime::operator-(const DateTime &other) {
 	return int(floor(abs(std::difftime(firstTime, secondTime) / (60 * 60 * 24))));
 }
 
-int DateTime::operator>(const DateTime &other) {
+bool DateTime::operator>(const DateTime &other) {
 	std::tm firstDate = { second_, minute_, hour_, day_, month_ - 1, year_ + 71 - 1900 };
 	std::tm secondDate = { other.second_, other.minute_, other.hour_, other.day_, other.month_ - 1, other.year_ + 71 - 1900 };
 
