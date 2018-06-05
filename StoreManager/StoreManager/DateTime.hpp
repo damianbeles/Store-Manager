@@ -35,6 +35,7 @@ public:
 	int operator>(const DateTime &);
 
 	static DateTime getCurrentDate();
+	static std::string getMonthName(int);
 
 private:
 	int second_;

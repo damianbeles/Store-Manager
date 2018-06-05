@@ -35,6 +35,10 @@ public:
 
 	void showSolvedOrdersOlderThan(int) const;
 	void showProductsWhichAmountIsLessThan(int) const;
+	void showExpiredProducts() const;
+	void showAverageNumberOfOrderedProducts() const;
+	void showStatistics() const;
+
 	bool isProductInStore(std::string) const;
 	int getNumberOfSolvedOrdersInYear(int) const;
 
@@ -46,7 +50,6 @@ public:
 	int getNumberOfNonPerishableProducts() const;
 	int getNumberOfPerishableProducts() const;
 
-	void showExpiredProducts() const;
 	void sortOrderListBy(SortCriteria);
 
 	Store& operator+=(const std::shared_ptr<Product> &);

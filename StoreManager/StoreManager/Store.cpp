@@ -6,6 +6,8 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <map>
+#include <numeric>
 
 Store::Store(std::string name, Coordinates coordinates)
 	: name_(name)
@@ -237,4 +239,35 @@ Store& Store::operator+=(std::string storePath) {
 std::shared_ptr<Product> Store::getProduct(std::string barCode) const {
 	auto it = std::find_if(productList_.begin(), productList_.end(), [barCode](std::shared_ptr<Product> product) { return product->getBarCode() == barCode; });
 	return *it;
+}
+
+void Store::showAverageNumberOfOrderedProducts() const {
+	double average = std::accumulate(std::next(orderList_.begin()), orderList_.end(), (double)orderList_.front()->getProductList().size(), [](double order, const std::unique_ptr<Order>& nextOrder) {
+		return order + nextOrder->getProductList().size();
+	});
+	average /= orderList_.size();
+
+	std::cout << "The average of ordered products is: " << average << " products per order!\n";
+}
+
+void Store::showStatistics() const {
+	std::map<int, std::map<std::string, double>> statistics;
+
+	for (auto &order : orderList_) {
+		if (order->getOrderType() == OrderType::SHIPPING) {
+			for (auto &product : order->getProductList()) {
+				statistics[order->getEndDate().getYear()][DateTime::getMonthName(order->getEndDate().getMonth())] += product->getPricePerPiece();
+			}
+		}
+	}
+
+	for (auto &stats : statistics) {
+		std::cout << "\nYear " << stats.first << " came with the following values for shipped products:\n";
+		double totalPrice = 0.0;
+		for (int i = 1; i <= 12; ++i) {
+			std::cout << DateTime::getMonthName(i) << ": $" << stats.second[DateTime::getMonthName(i)] << "\n";
+			totalPrice += stats.second[DateTime::getMonthName(i)];
+		}
+		std::cout << "Total price for shipped products this year is: $" << totalPrice << "!\n";
+	}
 }

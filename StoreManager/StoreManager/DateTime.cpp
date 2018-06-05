@@ -82,6 +82,11 @@ int DateTime::getYear() const {
 	return year_;
 }
 
+std::string DateTime::getMonthName(int month) {
+	std::string months[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	return months[month - 1];
+}
+
 std::string DateTime::ToString() const {
 	return std::to_string(hour_) + ":" + std::to_string(minute_) + ":" + std::to_string(second_) + " " + std::to_string(day_) + "/" + std::to_string(month_) + "/" + std::to_string(year_);
 }
