@@ -4,7 +4,7 @@
 This is a store manager made for a college seminar project given by @stefaniga.
 
 # Description
-The project is a program which allow you to manage Stores, each one having Products and Orders.
+The project is a program which allows you to manage Stores, each one having Products and Orders.
 
 # Diagrams For Classes
 ## Product
